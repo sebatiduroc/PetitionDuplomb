@@ -1,7 +1,9 @@
 name: Collecter les signatures
 
 on:
-  workflow_dispatch:      # Permet de lancer manuellement
+  schedule:
+    - cron: '* * * * *'  # Exécute le scraper toutes les minutes
+  workflow_dispatch:
 
 permissions:
   contents: write         # Donne les droits d'écriture au GITHUB_TOKEN
