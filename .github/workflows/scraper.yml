@@ -2,7 +2,7 @@ name: Collecter les signatures
 
 on:
   schedule:
-    - cron: '*/30 * * * *' # toutes les 30 minutes
+    - cron: '*/1 * * * *' # toutes les 1 minute
   workflow_dispatch:       # permet de lancer manuellement
 
 jobs:
