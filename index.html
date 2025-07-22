@@ -23,7 +23,25 @@
     fetch("data.json")
       .then(response => response.json())
       .then(entries => {
-        const labels = entries.map(e => e.timestamp);
+        if (entries.length === 0) {
+          document.getElementById('signatureChart').remove();
+          const msg = document.createElement('p');
+          msg.textContent = "Aucune donnée de signature disponible pour le moment.";
+          document.body.appendChild(msg);
+          return;
+        }
+
+        // Formater les dates : 22/07 10:45
+        const labels = entries.map(e => {
+          const date = new Date(e.timestamp + 'Z'); // UTC
+          return date.toLocaleString('fr-FR', {
+            day: '2-digit',
+            month: '2-digit',
+            hour: '2-digit',
+            minute: '2-digit'
+          });
+        });
+
         const values = entries.map(e => e.signatures);
 
         const ctx = document.getElementById('signatureChart').getContext('2d');
@@ -46,18 +64,22 @@
               x: {
                 title: {
                   display: true,
-                  text: 'Temps (UTC)'
+                  text: 'Date et heure (UTC)'
                 }
               },
               y: {
-  min: 1600000,
-  max: 1800000,
-  title: {
-    display: true,
-    text: 'Nombre de signatures'
-  }
-}
-
+                min: 1600000,
+                max: 1800000,
+                title: {
+                  display: true,
+                  text: 'Nombre de signatures'
+                },
+                ticks: {
+                  callback: function(value) {
+                    return (value / 1_000_000).toFixed(2) + ' M';
+                  }
+                }
+              }
             }
           }
         });
