@@ -1,8 +1,6 @@
 name: Collecter les signatures
 
 on:
-  schedule:
-    - cron: '0 * * * *'  # Exécute le scraper toutes les heures
   workflow_dispatch:      # Permet de lancer manuellement
 
 permissions:
