@@ -21,7 +21,7 @@ if element:
         with open("data.json", "r") as f:
             data = json.load(f)
     except FileNotFoundError:
-        data = []
+        data = [1973]
 
     data.append({"timestamp": now, "signatures": count})
 
