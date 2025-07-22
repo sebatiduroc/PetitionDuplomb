@@ -10,7 +10,7 @@ soup = BeautifulSoup(response.text, "html.parser")
 
 # Cherche l'élément contenant le nombre de signatures
 # ⚠️ Peut changer si la structure HTML du site évolue
-element = soup.find("span", class_="initiative-counter-number")
+element = soup.find("span", class_="progress_bar_number")
 
 if element:
     count = int(element.text.replace(" ", "").replace(" ", "").replace("\xa0", "").strip())
